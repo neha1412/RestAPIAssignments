@@ -1,8 +1,17 @@
 import Users.UsersClient;
 import org.hamcrest.Matchers;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 public class createUserWithInvaildEmail {
+
+    //Arrange
+    private UsersClient usersClient;
+
+    @BeforeClass
+    public void beforeClass(){
+        usersClient = new UsersClient();
+    }
 
     @Test
     public void shouldnotAllowtoCreateUserWithInvalidEmail()
@@ -13,7 +22,7 @@ public class createUserWithInvaildEmail {
                 " \"email\": \"soniak13gmail.com\",\n" +
                 " \"status\": \"active\"\n" +
                 "}";
-        new UsersClient().createUsers(body)
+        usersClient.createUsers(body)
                 .then()
                 .log().body()
                 .statusCode(422)
