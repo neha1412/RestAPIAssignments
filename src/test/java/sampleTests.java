@@ -1,4 +1,5 @@
 import io.restassured.http.ContentType;
+import org.hamcrest.Matchers;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -15,7 +16,8 @@ public class sampleTests {
                 .get("https://gorest.co.in/public/v1/users")
                 .then()
                 .statusCode(200)
-                .log().body();
+                .log().body()
+                .body("data", Matchers.hasSize(20));
     }
 
     @Test
@@ -28,13 +30,14 @@ public class sampleTests {
                 .body("{\n" +
                         "  \"name\": \"Tenali Rama\", \n" +
                         " \"gender\": \"male\", \n" +
-                        " \"email\": \"tenali.rama12@gmail.com\",\n" +
+                        " \"email\": \"tenali.rama14@gmail.com\",\n" +
                         " \"status\": \"active\"\n" +
                         "}")
                 .when()
                 .post("https://gorest.co.in/public/v1/users")
                 .then()
                 .log().body()
-                .statusCode(201);
+                .statusCode(201)
+                .body("data.name", Matchers.equalTo("Tenali Rama"));
     }
 }
