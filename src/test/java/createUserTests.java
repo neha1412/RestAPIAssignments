@@ -1,4 +1,5 @@
 import Users.UsersClient;
+import Users.create.CreateUserRequestBody;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
 import org.hamcrest.Matchers;
@@ -21,15 +22,13 @@ public class createUserTests {
     @Test
     public void shouldCreateMaleUsers() {
 
-        String email = String.format("%s@gmail.com" , UUID.randomUUID());
+        String email = String.format("%s@gmail.com",UUID.randomUUID());
+        String gender = "male";
+        String status = "active";
+        String name = "Tenali Rama";
 
-        String body = String.format("{\n" +
-                "  \"name\": \"Tenali Rama\", \n" +
-                " \"gender\": \"male\", \n" +
-                " \"email\": \"%s\",\n" +
-                " \"status\": \"active\"\n" +
-                "}" , email);
-        usersClient.createUsers(body)
+        CreateUserRequestBody requestBody = new CreateUserRequestBody(name,gender,email,status);
+        usersClient.createUsers(requestBody)
                 .then()
                 .log().body()
                 .statusCode(201)
@@ -40,14 +39,13 @@ public class createUserTests {
     @Test
     public void shouldCreateFemaleUsers() {
 
-        String email = String.format("%s@gmail.com" , UUID.randomUUID());
-        String body = String.format("{\n" +
-                "  \"name\": \"Sonia K\", \n" +
-                " \"gender\": \"female\", \n" +
-                " \"email\": \"%s\",\n" +
-                " \"status\": \"active\"\n" +
-                "}", email);
-        usersClient.createUsers(body)
+        String email = String.format("%s@gmail.com",UUID.randomUUID());
+        String name = "Sonia K";
+        String gender = "female";
+        String status = "active";
+
+        CreateUserRequestBody requestBody = new CreateUserRequestBody(name,gender,email,status);
+        usersClient.createUsers(requestBody)
                 .then()
                 .log().body()
                 .statusCode(201)

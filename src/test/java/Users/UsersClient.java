@@ -1,12 +1,13 @@
 package Users;
 
+import Users.create.CreateUserRequestBody;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
 
 import static io.restassured.RestAssured.given;
 
 public class UsersClient {
-    public Response createUsers(String body) {
+    public Response createUsers(CreateUserRequestBody body) {
         return given()
                 .accept(ContentType.JSON)
                 .contentType(ContentType.JSON)
