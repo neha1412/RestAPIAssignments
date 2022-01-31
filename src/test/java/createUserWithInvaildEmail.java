@@ -23,7 +23,7 @@ public class createUserWithInvaildEmail {
         String email = "soniak13gmail.com";
         String status = "active";
 
-        CreateUserRequestBody requestBody = new CreateUserRequestBody(name, gender, email, status);
+        CreateUserRequestBody requestBody = CreateUserRequestBody.builder().name(name).gender(gender).email(email).status(status).build();
         usersClient.createUsers(requestBody)
                 .then()
                 .log().body()

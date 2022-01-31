@@ -27,7 +27,11 @@ public class createUserTests {
         String status = "active";
         String name = "Tenali Rama";
 
-        CreateUserRequestBody requestBody = new CreateUserRequestBody(name,gender,email,status);
+        CreateUserRequestBody requestBody = CreateUserRequestBody.builder().
+                name(name).
+                gender(gender).
+                email(email).
+                status(status).build();
         usersClient.createUsers(requestBody)
                 .then()
                 .log().body()
@@ -44,7 +48,9 @@ public class createUserTests {
         String gender = "female";
         String status = "active";
 
-        CreateUserRequestBody requestBody = new CreateUserRequestBody(name,gender,email,status);
+        CreateUserRequestBody requestBody = CreateUserRequestBody.builder()
+                .name(name).gender(gender)
+                .email(email).status(status).build();
         usersClient.createUsers(requestBody)
                 .then()
                 .log().body()
